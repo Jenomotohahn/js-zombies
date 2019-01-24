@@ -8,6 +8,19 @@
  * @property {string} name
  */
 
+ class Item{
+   constructor(name){
+     this.name = name;
+   }
+   getName(){
+     return this.name;
+   }
+ }
+
+
+
+
+
 
 /**
  * Class => Weapon(name, damage)
@@ -24,6 +37,19 @@
  * @param {number} damage   The weapon's damage.
  * @property {number} damage
  */
+
+
+ class Weapon extends Item{
+   constructor(name, number){
+    super(name);
+    this.damage = number;
+   }
+   getDamage(){
+     return this.damage;
+   };
+ }
+
+
 
 
 /**
@@ -48,6 +74,21 @@
  * @param {number} energy     The energy the food provides.
  * @property {number} energy
  */
+
+
+ class Food extends Item{
+   constructor(name, energy){
+     super(name);
+     this.energy = energy;
+   }
+   getEnergy(){
+     return this.energy;
+   }
+ }
+
+
+
+
 
 
 /**
@@ -80,6 +121,82 @@
  */
 
 
+class Player {
+  constructor(name, health, strength, speed){
+    this.name = name;
+    this.health = health;
+    this.strength = strength;
+    this.speed = speed;
+    this._pack = [];
+    this._maxHealth = health;
+    this.isAlive = true;
+    this.equipped = false;
+  }
+  getPlayerName(){
+    return this.name;
+  };
+  getHealth(){
+    return this.health;
+  };
+  getStrength(){
+    return this.strength;
+  };
+  getSpeed(){
+    return this.speed;
+  };
+  getPack(){
+    return this._pack;
+  };
+  getMaxHealth(){
+    return this._maxHealth;
+  };
+  checkPack(){
+    let packContents = this.getPack();
+    console.log(packContents);
+  };
+  takeItem(item){
+    let packContents = this.getPack();
+    if(packContents.length === 3){
+      console.log('Pack is full, item cannot be stored')
+      return false;
+    }else{
+      console.log(this.name, item);
+      packContents.push(item);
+      this._pack = packContents;
+    }
+  }
+  discardItem(item){
+    let packContents = this.getPack();
+    if(packContents.indexOf(item) === -1){
+     console.log('Item not Found!');
+     return false;
+    }else{
+      packContents.splice(packContents.indexOf(item), 1);
+      this._pack = packContents;
+      console.log(this.name + ' ' + item + ' ' + 'was discarded');
+      return true;
+    }
+  }
+  equip(itemToEquip){
+    let packContents = this.getPack();
+    if(itemToEquip instanceof Weapon){
+      if(packContents.indexOf(itemToEqup) === -1){
+        return false;
+      }else{
+       if(this.equipped === false){
+          this.equipped === itemToEquip;
+       }else{
+         packContents[packContents.indexOf(item)] === this.equipped;
+         packContents.slice(packContents.indexOf(itemToEquip), 1);
+        }
+     }
+  }
+    }
+
+};
+
+
+
 /**
  * Player Class Method => checkPack()
  * -----------------------------
@@ -91,6 +208,8 @@
  *
  * @name checkPack
  */
+
+  
 
 
 /**
